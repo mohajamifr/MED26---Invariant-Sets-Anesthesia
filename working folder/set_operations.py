@@ -21,7 +21,8 @@ def pontryagin_difference(P: pc.Polytope, Q: pc.Polytope) -> pc.Polytope:
     if Vq is None:
         raise ValueError("extreme() returned None (Q may be empty, unbounded, or lower-dimensional).")
 
-    beta = np.max(Vq @ Gx.T, axis=0)
+    # beta = np.max(Vq @ Gx.T, axis=0)
+    beta = np.max(Gx @ Vq.T, axis=1)  # shape (m,)
 
     return pc.Polytope(Gx, gx - beta)
 
@@ -173,7 +174,7 @@ def linear_image(P: pc.Polytope, K, d=None) -> pc.Polytope:
     W = V @ K.T
     W = W + d  # broadcast
 
-    # Special-case 1D output: build interval polytope directly (more reliable than qhull in 1D)
+    # Special-case 1D output: build interval polytope directly
     if m == 1:
         wmin = float(np.min(W))
         wmax = float(np.max(W))

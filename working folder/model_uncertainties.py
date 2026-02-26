@@ -100,8 +100,6 @@ def load_model(patient_char=[35, 170, 70, 1], drug='Propofol',
 
             ke0 = 0.456
 
-            # define ke0 using Eleveld PD model
-            # ke0 = 0.146 * (weight/70)**(-0.25)
 
             # variability
             cv_v1 = v1 * 0.0404
@@ -119,7 +117,6 @@ def load_model(patient_char=[35, 170, 70, 1], drug='Propofol',
             w_cl2 = np.sqrt(np.log(1 + cv_cl2**2))
             w_cl3 = np.sqrt(np.log(1 + cv_cl3**2))
             w_ke0 = np.sqrt(np.log(1 + cv_ke**2))
-            # w_ke0 = np.sqrt(0.702)
 
         elif model == "eleveld":
             AGE_ref = 35
